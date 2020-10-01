@@ -2,7 +2,7 @@
 	<view class="tab">
 		<scroll-view class="tab-scroll-x" scroll-x>
 			<view class="tab-scroll">
-				<view class="tab-scroll-label" v-for="(item,index) in list" :key="index">{{item.name}}</view>
+				<view class="tab-scroll-label" :class="{active: activeIndex == index}" v-for="(item,index) in list" :key="index" @click="getTab(item,index)">{{item.name}}</view>
 			</view>
 		</scroll-view>
 		<view class="tab-icons">
@@ -23,8 +23,17 @@
 		},
 		data() {
 			return {
-				
+				activeIndex: 0,
 			};
+		},
+		methods: {
+			getTab(item,index) {
+				this.activeIndex = index;
+				this.$emit('tab', {
+					data: item,
+					index
+				})
+			} 
 		}
 	}
 </script>
@@ -49,7 +58,10 @@
 				padding: 0 10px;
 				font-size: 14px;
 				color: #333;
-			} 
+				&.active {
+					color: $uni-base-select;
+				}
+			}
 		}
 	}
 	.tab-icons {
