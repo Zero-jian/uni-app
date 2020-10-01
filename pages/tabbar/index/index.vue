@@ -1,9 +1,7 @@
 <template>
-	<view>
+	<view class="content">
 		<navBar></navBar>
-		<view class="content">
-			<view v-for="item in 100">{{item}}</view>
-		</view>
+		<tab></tab>
 	</view>
 </template>
 

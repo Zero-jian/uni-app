@@ -1,0 +1,51 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.navBar .navBar-fixed {
+  background: #f07373;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+.navBar .navBar-fixed .navBar-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 0 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.navBar .navBar-fixed .navBar-content .navBar-search {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 0 15px;
+  background: #ffffff;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.navBar .navBar-fixed .navBar-content .navBar-search .navBar-search-icon {
+  margin-right: 5px;
+}
+

@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.tab {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.tab .tab-scroll-x {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.tab .tab-scroll-x .tab-scroll {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.tab .tab-scroll-x .tab-scroll .tab-scroll-label {
+  height: 100%;
+  height: 45px;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  text-align: center;
+  line-height: 45px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #333;
+}
+.tab .tab-icons {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  width: 45px;
+  position: relative;
+}
+.tab .tab-icons::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 1px;
+  background: #ddd;
+}
+
