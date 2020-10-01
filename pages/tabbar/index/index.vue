@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<navBar></navBar>
-		<tab></tab>
+		<tab :list="tabList"></tab>
 	</view>
 </template>
 
@@ -9,11 +9,19 @@
 	export default {
 		data() {
 			return {
-				
+				tabList: []
 			}
 		},
+		onLoad() {
+			this.getLabel();
+		},
 		methods: {
-			
+			// 获取标签数据
+			getLabel() {
+				this.$api.get_label().then((res) => {
+					this.tabList = res.data;
+				})
+			}
 		}
 	}
 </script>
