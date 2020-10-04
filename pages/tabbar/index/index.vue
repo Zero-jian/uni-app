@@ -1,12 +1,10 @@
 <template>
 	<view class="home">
 		<navBar></navBar>
-		<tab :list="tabList" @tab="tab"></tab>
-		<list-scroll>
-			<list-card mode="base"></list-card>
-			<list-card mode="image"></list-card>
-			<list-card mode="column"></list-card>
-		</list-scroll>
+		<tab :list="tabList" :tabIndex="tabIndex" @tab="tab"></tab>
+		<view class="swiper">
+			<list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
+		</view>
 	</view>
 </template> 
 
@@ -14,13 +12,15 @@
 	export default {
 		data() {
 			return {
-				tabList: []
+				tabList: [],
+				tabIndex: 0,
+				activeIndex: 0,
 			}
 		},
 		onLoad() {
 			this.getLabel();
 		},
-		methods: {
+		methods: { 
 			// 获取标签数据
 			getLabel() {
 				this.$api.get_label().then((res) => {
@@ -28,8 +28,12 @@
 				})
 			},
 			// 点击标签
-			tab(item, index) {
-				console.log(item,index)
+			tab(item) {
+				this.activeIndex = item.index;
+			},
+			// 轮播图切换
+			change(current) {
+				this.tabIndex = current;
 			}
 		}
 	}
@@ -44,6 +48,10 @@
 			flex-direction: column;
 			height: 100%;
 			flex: 1;
+			.swiper {
+				flex: 1;
+				overflow: hidden;
+			}
 		}
 	}
 </style>

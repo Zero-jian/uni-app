@@ -20,6 +20,10 @@
 					return [];
 				}
 			},
+			tabIndex: {
+				type: Number,
+				default: 0
+			}
 		},
 		data() {
 			return {
@@ -34,6 +38,11 @@
 					index
 				})
 			} 
+		},
+		watch: {
+			tabIndex(newVal, oldVal) {
+				this.activeIndex = newVal;
+			}
 		}
 	}
 </script>
