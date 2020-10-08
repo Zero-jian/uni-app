@@ -1,51 +1,51 @@
 <template>
 	<view class="card">
 		<!-- 基础卡片 -->
-		<view class="card-list" v-if="mode === 'base'">
-			<view class="card-image">
-				<image src="../../static/image/follow-active.png" mode="aspectFit"></image>
+		<view class="card-list" v-if="item.mode === 'base'">
+			<view class="card-image" v-if="item.cover.length">
+				<image :src="item.cover[0]" mode="aspectFit"></image>
 			</view>
 			<view class="card-content">
 				<view class="card-content-des">
-					<text>uni-app</text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="card-content-status">
-					<text class="card-label">前端</text>
-					<text class="card-look">120浏览</text>
+					<text class="card-label">{{item.classify}}</text>
+					<text class="card-look">{{item.browse_count}}浏览</text>
 				</view>
 			</view>
 		</view> 
 		
 		<!-- 多图卡片 -->
-		<view class="card-list mode-column" v-if="mode === 'column'">
+		<view class="card-list mode-column" v-if="item.mode === 'column'">
 			<view class="card-content">
 				<view class="card-content-des">
-					<text>uni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-app</text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="card-image">
-					<view class="card-list-image" v-for="(item,index) in 3" :key="index">
-						<image src="../../static/image/follow-active.png" mode="aspectFit"></image>
+					<view class="card-list-image" v-if="key < 3" v-for="(ctx,key) in item.cover" :key="key">
+						<image :src="ctx" mode="aspectFit"></image>
 					</view>
 				</view>
 				<view class="card-content-status">
-					<text class="card-label">前端</text>
-					<text class="card-look">120浏览</text>
+					<text class="card-label">{{item.classify}}</text>
+					<text class="card-look">{{item.browse_count}}浏览</text>
 				</view>
 			</view>
 		</view>
 		
 		<!-- 大图模式 -->
-		<view class="card-list mode-image" v-if="mode === 'image'">
+		<view class="card-list mode-image" v-if="item.mode === 'image'">
 			<view class="card-content">
-				<view class="card-image">
-					<image src="../../static/image/follow-active.png" mode="aspectFit"></image>
+				<view class="card-image" v-if="item.cover.length">
+					<image :src="item.cover[0]" mode="aspectFit"></image>
 				</view>
 				<view class="card-content-des">
-					<text>uni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-appuni-app</text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="card-content-status">
-					<text class="card-label">前端</text>
-					<text class="card-look">120浏览</text>
+					<text class="card-label">{{item.classify}}</text>
+					<text class="card-look">{{item.browse_count}}浏览</text>
 				</view>
 			</view>
 		</view>
@@ -55,10 +55,10 @@
 <script>
 	export default {
 		props: {
-			mode: {
-				type: String,
+			item: {
+				type: Object,
 				default() {
-					return 'base';
+					return {};
 				}
 			}
 		},
@@ -100,6 +100,7 @@
 				color: #333;
 				font-weight: 400;
 				line-height: 1.2;
+				margin-bottom: 10px;
 				text {
 					overflow: hidden;
 					text-overflow: ellipsis;
@@ -111,6 +112,7 @@
 			.card-content-status {
 				display: flex;
 				justify-content: space-between;
+				margin-top: 10px;
 				.card-label {
 					color: $uni-base-select;
 					padding: 0 5px;
@@ -127,7 +129,6 @@
 	.mode-column {
 		.card-image {
 			display: flex;
-			margin: 10px 0;
 			width: 100%;
 			height: 70px;
 			.card-list-image {
@@ -152,12 +153,9 @@
 			.card-image {
 				width: 100%;
 				height: 100px;
-				.card-content-des {
-					margin: 10px 0;
-				}
 			}
 			.card-content-des {
-				margin: 10px 0;
+				margin: 0;
 			}
 		}
 	}

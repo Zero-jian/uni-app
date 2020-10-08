@@ -2,7 +2,7 @@
 	<view class="list">
 		<swiper class="swiper" @change="change" :current="activeIndex">
 			<swiper-item class="swiper-item" v-for="(item,index) in tab" :key="index">
-				<list-item></list-item>
+				<list-item :list="listObject[index]"></list-item>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -28,15 +28,29 @@
 		},
 		data() {
 			return {
-				
+				list: [],
+				listObject: {},
 			};
 		},
 		methods: {
 			change(e) {
 				const { current } = e.detail;
+				this.getList(current)
 				this.$emit('change', current);
+			},
+			getList(num) { 
+				const name = this.tab[num].name
+				this.$api.get_list({ name }).then(res => {
+					this.$set(this.listObject, num, res.data)
+				})
 			}
 		},
+		watch: {
+			tab(newVal, oldVal) {
+				if(newVal.length === 0) return;
+				this.getList(this.activeIndex);
+			}
+		}
 	}
 </script>
 <style lang="scss">
