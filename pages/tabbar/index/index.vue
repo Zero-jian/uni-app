@@ -24,7 +24,9 @@
 			// 获取标签数据
 			getLabel() {
 				this.$api.get_label().then((res) => {
-					this.tabList = res.data;
+					let data = res.data;
+					data.unshift({ name: '全部' });
+					this.tabList = data;
 				})
 			},
 			// 点击标签
@@ -34,6 +36,7 @@
 			// 轮播图切换
 			change(current) {
 				this.tabIndex = current;
+				this.activeIndex = current;
 			}
 		}
 	}

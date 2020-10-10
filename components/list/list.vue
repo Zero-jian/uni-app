@@ -2,7 +2,7 @@
 	<view class="list">
 		<swiper class="swiper" @change="change" :current="activeIndex">
 			<swiper-item class="swiper-item" v-for="(item,index) in tab" :key="index">
-				<list-item :list="listObject[index]"></list-item>
+				<list-item :list="listObject[index]" :status="status[index]" @loadMore="loadMore"></list-item>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -30,19 +30,57 @@
 			return {
 				list: [],
 				listObject: {},
+				status: [],
+				loadStatus: [],
+				pageStatus: {}
 			};
 		},
 		methods: {
 			change(e) {
-				const { current } = e.detail;
-				this.getList(current)
+				const { current } = e.detail
 				this.$emit('change', current);
+				if(!this.listObject[current] || this.listObject[current].length === 0) {
+					this.getList(current)
+				}
 			},
 			getList(num) { 
-				const name = this.tab[num].name
-				this.$api.get_list({ name }).then(res => {
-					this.$set(this.listObject, num, res.data)
+				this.status[num] = 'loading';
+				if(!this.pageStatus[num]) {
+					this.pageStatus[num] = {
+						pageSize: 5,
+						page: 1
+					}
+				}
+				const name = this.tab[num].name;
+				const {pageSize, page} = this.pageStatus[num];
+				this.$api.get_list({ 
+					name,
+					page: page,
+					pageSize: pageSize,
+				}).then(res => {
+					const len = res.data.length;
+					if(len < pageSize) {
+						this.loadStatus[num] = false;
+						this.status[num] = 'noMore';
+					}
+					this.pageStatus[num] = {
+						pageSize: 5,
+						page: page + 1
+					}
+					let oldListObject = this.listObject[num];
+					let newListObject = [];
+					if(oldListObject) {
+						newListObject = [...oldListObject, ...res.data]
+					}  else {
+						newListObject = [...res.data];
+					}
+					this.$set(this.listObject, num, newListObject)
 				})
+			},
+			loadMore() {
+				if(this.loadStatus[this.activeIndex] !== false) {
+					this.getList(this.activeIndex);
+				}
 			}
 		},
 		watch: {

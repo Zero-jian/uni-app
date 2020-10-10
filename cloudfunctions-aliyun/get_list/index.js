@@ -3,14 +3,18 @@
 const db = uniCloud.database();
 
 exports.main = async (event, context) => {
-	const { name } = event;
+	const { name, page, pageSize } = event;
+	let matchObj = {};
 	
+	if(name !== '全部') {
+		matchObj = {
+			classify:  name
+		}
+	}
 	// 聚合查询
-	const list = await db.collection('article').aggregate().match({
-		classify:  name
-	}).project({
+	const list = await db.collection('article').aggregate().match(matchObj).project({
 		content: 0
-	}).end()
+	}).skip(pageSize * (page-1)).limit(pageSize).end()
 	
 	// 返回客户端
 	return {
