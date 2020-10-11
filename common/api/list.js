@@ -13,3 +13,10 @@ export const get_list = (param) => {
 		data: param
 	})
 }
+
+export const update_like = (param) => {
+	return $http({
+		url: 'update_like',
+		data: param
+	})
+}

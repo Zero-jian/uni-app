@@ -7,7 +7,8 @@
 			</view>
 			<view class="card-content">
 				<view class="card-content-des">
-					<text>{{item.title}}</text>
+					<text class="card-content-title">{{item.title}}</text>
+					<likes :item="item"></likes>
 				</view>
 				<view class="card-content-status">
 					<text class="card-label">{{item.classify}}</text>
@@ -20,7 +21,8 @@
 		<view class="card-list mode-column" v-if="item.mode === 'column'">
 			<view class="card-content">
 				<view class="card-content-des">
-					<text>{{item.title}}</text>
+					<text class="card-content-title">{{item.title}}</text>
+					<likes :item="item"></likes>
 				</view>
 				<view class="card-image">
 					<view class="card-list-image" v-if="key < 3" v-for="(ctx,key) in item.cover" :key="key">
@@ -41,7 +43,8 @@
 					<image :src="item.cover[0]" mode="aspectFit"></image>
 				</view>
 				<view class="card-content-des">
-					<text>{{item.title}}</text>
+					<text class="card-content-title">{{item.title}}</text>
+					<likes :item="item"></likes>
 				</view>
 				<view class="card-content-status">
 					<text class="card-label">{{item.classify}}</text>
@@ -97,11 +100,14 @@
 			flex-direction: column;
 			justify-content: space-between;
 			.card-content-des {
+				display: flex;
+				justify-content: space-between;
 				color: #333;
 				font-weight: 400;
 				line-height: 1.2;
 				margin-bottom: 10px;
-				text {
+				.card-content-title {
+					padding-right: 30px;
 					overflow: hidden;
 					text-overflow: ellipsis;
 					display: -webkit-box;
