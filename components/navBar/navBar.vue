@@ -2,21 +2,33 @@
 	<view class="navBar">
 		<view class="navBar-fixed">
 			<view :style="{height: `${statusBarHeight}px`}"></view>
-			<view class="navBar-content" :style="{height: `${navBarHeight}px`,width: `${searchWidth}px`}">
+			<view class="navBar-content" :class="{'navBar-isSearch': isSearch}" :style="{height: `${navBarHeight}px`,width: `${searchWidth}px`}">
+				<view class="navBar-search-back" v-if="isSearch">
+					<uni-icons class="icons" type="back" size="22" color="#fff"></uni-icons>
+				</view>
 				<view class="navBar-search" :style="{height: `${searchHeight}px`}">
 					<view class="navBar-search-icon">
 						<uni-icons type="search" size="16" color="#999"></uni-icons>
 					</view>
-					<view class="navBar-search-text">uni-app/vue/react</view>
+					<view class="navBar-search-text" @click.stop="search">
+						<text class="navBar-search-label" v-if="!isSearch">uni-app/vue/react</text>
+						<input type="text" value="123" placeholder="请输入需要搜索的内容" v-else>
+					</view>
 				</view>
 			</view>
-		</view>
+		</view> 
 		<view :style="{height: `${statusBarHeight + navBarHeight}px`}"></view>
 	</view>
 </template>
 
 <script>
 	export default {
+		props: {
+			isSearch: {
+				type: Boolean,
+				default: false
+			}
+		},
 		data() {
 			return { 
 				statusBarHeight: 20,
@@ -43,6 +55,12 @@
 				this.searchHeight = height;
 				this.searchWidth = left;
 				// #endif
+			},
+			search() {
+				if (this.isSearch) return;
+				uni.navigateTo({
+					url: "/pages/home-search/home-search"
+				})
 			}
 		}
 	}
@@ -71,7 +89,18 @@
 				.navBar-search-icon {
 					margin-right: 5px;
 				}
-				.navBar-search-text {}
+				.navBar-search-text {
+					
+				}
+			}
+			&.navBar-isSearch {
+				padding-left: 0;
+				.navBar-search {
+					border-radius: 5px;
+				}
+			}
+			.navBar-search-back {
+				padding: 0 5px;
 			}
 		}
 	}
