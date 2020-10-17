@@ -4,7 +4,7 @@
 			<view :style="{height: `${statusBarHeight}px`}"></view>
 			<view class="navBar-content" :class="{'navBar-isSearch': isSearch}" :style="{height: `${navBarHeight}px`,width: `${searchWidth}px`}">
 				<view class="navBar-search-back" v-if="isSearch">
-					<uni-icons class="icons" type="back" size="22" color="#fff"></uni-icons>
+					<uni-icons class="icons" type="back" size="22" color="#fff" @click="back"></uni-icons>
 				</view>
 				<view class="navBar-search" :style="{height: `${searchHeight}px`}">
 					<view class="navBar-search-icon">
@@ -12,7 +12,7 @@
 					</view>
 					<view class="navBar-search-text" @click.stop="search">
 						<text class="navBar-search-label" v-if="!isSearch">uni-app/vue/react</text>
-						<input type="text" value="123" placeholder="请输入需要搜索的内容" v-else>
+						<input type="text" v-model="searchVal" placeholder="请输入需要搜索的内容" @input="changeSearch" v-else>
 					</view>
 				</view>
 			</view>
@@ -27,6 +27,10 @@
 			isSearch: {
 				type: Boolean,
 				default: false
+			},
+			text: {
+				type: [String, Number],
+				default: ''
 			}
 		},
 		data() {
@@ -35,6 +39,7 @@
 				navBarHeight: 45,
 				searchHeight: 32,
 				searchWidth: 375,
+				searchVal: '',
 			};
 		},
 		created() {
@@ -61,6 +66,19 @@
 				uni.navigateTo({
 					url: "/pages/home-search/home-search"
 				})
+			},
+			changeSearch() {
+				this.$emit('changeSearch', this.searchVal);
+			},
+			back() {
+				uni.switchTab({
+					url: '/pages/tabbar/index/index'
+				})
+			}
+		},
+		watch: {
+			text(newVal) {
+				this.searchVal = newVal;
 			}
 		}
 	}

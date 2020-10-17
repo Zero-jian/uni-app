@@ -1,5 +1,5 @@
 <template>
-	<view class="card">
+	<view class="card" @click="articleDetail">
 		<!-- 基础卡片 -->
 		<view class="card-list" v-if="item.mode === 'base'">
 			<view class="card-image" v-if="item.cover.length">
@@ -69,6 +69,11 @@
 			return {
 				
 			};
+		},
+		methods: {
+			articleDetail() {
+				this.$emit("articleDetail");
+			}
 		}
 	}
 </script>

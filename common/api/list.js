@@ -20,3 +20,10 @@ export const update_like = (param) => {
 		data: param
 	})
 }
+
+export const get_search = (param) => {
+	return $http({
+		url: 'get_search',
+		data: param
+	})
+}
