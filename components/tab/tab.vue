@@ -6,7 +6,7 @@
 			</view>
 		</scroll-view>
 		<view class="tab-icons">
-			<uni-icons type="gear" size="26" color="#666"></uni-icons>
+			<uni-icons type="gear" size="26" color="#666" @click="manage"></uni-icons>
 		</view>
 	</view>
 </template>
@@ -37,7 +37,12 @@
 					data: item,
 					index
 				})
-			} 
+			},
+			 manage() {
+				 uni.navigateTo({
+				 	url: '/pages/home-label/home-label'
+				 })
+			 }
 		},
 		watch: {
 			tabIndex(newVal, oldVal) {
