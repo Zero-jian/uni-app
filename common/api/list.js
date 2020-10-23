@@ -1,9 +1,9 @@
 import $http from '../http.js'
 
-export const get_label = () => {
+export const get_label = (param) => {
 	return $http({
 		url: 'get_label',
-		data: {}
+		data: param
 	})
 }
 
@@ -24,6 +24,13 @@ export const update_like = (param) => {
 export const get_search = (param) => {
 	return $http({
 		url: 'get_search',
+		data: param
+	})
+}
+
+export const update_label = (param) => {
+	return $http({
+		url: 'update_label',
 		data: param
 	})
 }

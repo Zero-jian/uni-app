@@ -3,19 +3,26 @@
 		<view class="home-label-edit">
 			<view class="label-title">
 				<text class="label-my">我的标签</text>
-				<text class="label-edit">编辑</text>
+				<text class="label-edit" @click="editLabel">{{is_edit ? '完成' : '编辑'}}</text>
 			</view>
 			<view class="label-manage">
-				<view class="label-manage-detail" v-for="(item,index) in 10">
-					<view class="label-manage-text">标签{{index}}</view>
-					<view class="label-manage-cancel">
-						<uni-icons class="label-icon" type="clear" size="14" color="red"></uni-icons>
+				<view class="label-manage-detail" v-for="(item,index) in editList">
+					<view class="label-manage-text">{{item.name}}</view>
+					<view class="label-manage-cancel" @click="delLabel(index)">
+						<uni-icons v-if="is_edit" class="label-icon" type="clear" size="14" color="red"></uni-icons>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="home-label-commend">
-			<view class="label-manage-text" v-for="(item,index) in 10">标签{{index}}</view>
+		<view class="home-label-edit home-label-bottom">
+			<view class="label-title">
+				<text class="label-my">推荐标签</text>
+			</view>
+			<view class="label-manage">
+				<view class="label-manage-detail" v-for="(item,index) in list" @click="addLabel(index)">
+					<view class="label-manage-text">{{item.name}}</view>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -24,11 +31,55 @@
 	export default {
 		data() {
 			return {
-				
+				is_edit: false,
+				editList: [], // 我的标签
+				list: [], // 推荐标签
 			}
 		},
+		onLoad() {
+			this.getLabel();
+		},
 		methods: {
-			
+			editLabel() {
+				if (this.is_edit) {
+					this.is_edit = false;
+					this.setUpdateLabel()
+				} else {
+					this.is_edit = true;
+				}
+			},
+			getLabel() {
+				this.$api.get_label({type: 'all'}).then(res => {
+					const { data } = res;
+					this.editList = data.filter(item => item.current);
+					this.list = data.filter(item => !item.current);
+				})
+			},
+			delLabel(index) {
+				if (this.is_edit) {
+					this.list.push(this.editList[index])
+					this.editList.splice(index, 1);
+				}
+			},
+			addLabel(index) {
+				if (this.is_edit) {
+					this.editList.push(this.list[index]);
+					this.list.splice(index, 1);
+				}
+			},
+			setUpdateLabel() {
+				const newArr = [];
+				this.editList.forEach(item => newArr.push(item._id))
+				uni.showLoading();
+				this.$api.update_label({ label: newArr }).then(res => {
+					uni.hideLoading();
+					uni.showToast({
+						title: '编辑成功',
+						icon: 'none'
+					})
+					this.getLabel()
+				})
+			}
 		}
 	}
 </script>
@@ -77,20 +128,8 @@ page {
 			}
 		}
 	}
-	.home-label-commend {
-		background: #fff;
+	.home-label-bottom {
 		margin-top: 10px;
-		display: flex;
-		flex-wrap: wrap;
-		padding: 10px 0 0 10px;
-		.label-manage-text {
-			border: 1px solid #666;
-			color: #666;
-			padding: 3px 5px;
-			border-radius: 5px;
-			font-size: 12px;
-			margin: 0 10px 10px 0;
-		}
 	}
 }
 </style>
