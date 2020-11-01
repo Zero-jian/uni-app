@@ -6,11 +6,17 @@
 				<text class="label-edit" @click="editLabel">{{is_edit ? '完成' : '编辑'}}</text>
 			</view>
 			<view class="label-manage">
-				<view class="label-manage-detail" v-for="(item,index) in editList">
-					<view class="label-manage-text">{{item.name}}</view>
-					<view class="label-manage-cancel" @click="delLabel(index)">
-						<uni-icons v-if="is_edit" class="label-icon" type="clear" size="14" color="red"></uni-icons>
+				<template v-if="!loading">
+					<view class="label-manage-detail" v-for="(item,index) in editList">
+						<view class="label-manage-text">{{item.name}}</view>
+						<view class="label-manage-cancel" @click="delLabel(index)">
+							<uni-icons v-if="is_edit" class="label-icon" type="clear" size="14" color="red"></uni-icons>
+						</view>
 					</view>
+				</template>
+				<uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more>
+				<view class="no-data" v-if="!loading && editList.length === 0">
+					当前暂无数据
 				</view>
 			</view>
 		</view>
@@ -19,8 +25,14 @@
 				<text class="label-my">推荐标签</text>
 			</view>
 			<view class="label-manage">
-				<view class="label-manage-detail" v-for="(item,index) in list" @click="addLabel(index)">
-					<view class="label-manage-text">{{item.name}}</view>
+				<template v-if="!loading">
+					<view class="label-manage-detail" v-for="(item,index) in list" @click="addLabel(index)">
+						<view class="label-manage-text">{{item.name}}</view>
+					</view>
+				</template>
+				<uni-load-more v-if="loading" status="loading" iconType="snow"></uni-load-more>
+				<view class="no-data" v-if="!loading && list.length === 0">
+					当前暂无数据
 				</view>
 			</view>
 		</view>
@@ -34,6 +46,7 @@
 				is_edit: false,
 				editList: [], // 我的标签
 				list: [], // 推荐标签
+				loading: false,
 			}
 		},
 		onLoad() {
@@ -49,10 +62,12 @@
 				}
 			},
 			getLabel() {
+				this.loading = true;
 				this.$api.get_label({type: 'all'}).then(res => {
 					const { data } = res;
 					this.editList = data.filter(item => item.current);
 					this.list = data.filter(item => !item.current);
+					this.loading = false;
 				})
 			},
 			delLabel(index) {
@@ -78,6 +93,7 @@
 						icon: 'none'
 					})
 					this.getLabel()
+					uni.$emit('labelChange', this.editList);
 				})
 			}
 		}
@@ -125,6 +141,13 @@ page {
 						z-index: 99
 					}
 				}
+			}
+			.no-data {
+				color: #666;
+				font-size: 14px;
+				text-align: center;
+				width: 100%;
+				padding: 10px 0 15px 0;
 			}
 		}
 	}

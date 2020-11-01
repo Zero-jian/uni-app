@@ -1,1 +1,1 @@
-<view class="content"><nav-bar vue-id="f8c7e56e-1" bind:__l="__l"></nav-bar><tab vue-id="f8c7e56e-2" bind:__l="__l"></tab></view>
+<view class="home"><nav-bar vue-id="f8c7e56e-1" bind:__l="__l"></nav-bar><tab vue-id="f8c7e56e-2" list="{{tabList}}" tabIndex="{{tabIndex}}" data-event-opts="{{[['^tab',[['tab']]]]}}" bind:tab="__e" bind:__l="__l"></tab><view class="swiper"><list vue-id="f8c7e56e-3" tab="{{tabList}}" activeIndex="{{activeIndex}}" data-event-opts="{{[['^change',[['change']]]]}}" bind:change="__e" bind:__l="__l"></list></view></view>

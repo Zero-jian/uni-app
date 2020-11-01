@@ -1,0 +1,127 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.card .card-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+}
+.card .card-list .card-image {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+.card .card-list .card-image image {
+  width: 100%;
+  height: 100%;
+}
+.card .card-list .card-content {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 14px;
+  margin-left: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.card .card-list .card-content .card-content-des {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  color: #333;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.card .card-list .card-content .card-content-des .card-content-title {
+  padding-right: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.card .card-list .card-content .card-content-status {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin-top: 10px;
+}
+.card .card-list .card-content .card-content-status .card-label {
+  color: #f07373;
+  padding: 0 5px;
+  margin-rig: 5px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
+  border: 1px #f07373 solid;
+}
+.card .card-list .card-content .card-content-status .card-look {
+  color: #999;
+}
+.card .mode-column .card-image {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 70px;
+}
+.card .mode-column .card-image .card-list-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  margin-left: 10px;
+}
+.card .mode-column .card-image .card-list-image:first-child {
+  margin-left: 0;
+}
+.card .mode-column .card-image .card-list-image image {
+  width: 100%;
+  height: 100%;
+}
+.card .mode-image .card-content {
+  margin-left: 0;
+}
+.card .mode-image .card-content .card-image {
+  width: 100%;
+  height: 100px;
+}
+.card .mode-image .card-content .card-content-des {
+  margin: 0;
+}
+

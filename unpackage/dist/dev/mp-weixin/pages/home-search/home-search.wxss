@@ -1,0 +1,95 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  height: 100%;
+}
+.search {
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.search .search-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  background: #f5f5f5;
+}
+.search .search-flex .search-content {
+  background: #fff;
+  padding-bottom: 20px;
+  -webkit-box-shadow: -3px 5px 10px #fff;
+          box-shadow: -3px 5px 10px #fff;
+  padding: 0 10px;
+}
+.search .search-flex .search-content .search-button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+}
+.search .search-flex .search-content .search-button .search-history {
+  color: #f07373;
+}
+.search .search-flex .search-content .search-button .search-clear {
+  color: #30b33a;
+}
+.search .search-flex .search-content .search-label-content {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.search .search-flex .search-content .search-label-content .search-label-text {
+  margin: 0 10px 10px 0;
+  color: #666;
+  border: 1px solid #666;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  padding: 2px 10px;
+}
+.search .search-flex .no-data {
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  width: 100%;
+  font-size: 12px;
+  color: #666;
+  background: #fff;
+}
+.search .search-article {
+  overflow: hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.search .search-article .search-article-no {
+  height: 100%;
+  text-align: center;
+  margin-top: 100px;
+  font-size: 14px;
+  color: #999;
+}
+

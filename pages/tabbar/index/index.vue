@@ -18,6 +18,7 @@
 			}
 		},
 		onLoad() {
+			this.bindEvent();
 			this.getLabel();
 		},
 		methods: { 
@@ -25,8 +26,8 @@
 			getLabel() {
 				this.$api.get_label().then((res) => {
 					let data = res.data;
-					data.unshift({ name: '全部' });
-					this.tabList = data;
+					this.tabList = data.filter(item => item.current);
+					this.tabList.unshift({ name: '全部' });
 				})
 			},
 			// 点击标签
@@ -37,6 +38,14 @@
 			change(current) {
 				this.tabIndex = current;
 				this.activeIndex = current;
+			},
+			bindEvent() {
+				uni.$on('labelChange', res => {
+					this.tabList = [];
+					this.tabIndex = 0;
+					this.activeIndex = 0;
+					this.getLabel();
+				})
 			}
 		}
 	}

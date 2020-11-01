@@ -86,6 +86,8 @@
 		watch: {
 			tab(newVal, oldVal) {
 				if(newVal.length === 0) return;
+				this.listObject = {};
+				this.pageStatus = {};
 				this.getList(this.activeIndex);
 			}
 		}

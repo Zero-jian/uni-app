@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  background: #f5f5f5;
+}
+.home-label .home-label-edit {
+  background: #fff;
+  padding: 0 10px;
+}
+.home-label .home-label-edit .label-title {
+  height: 30px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 14px;
+}
+.home-label .home-label-edit .label-title .label-my {
+  color: #666;
+}
+.home-label .home-label-edit .label-title .label-edit {
+  color: #4cd964;
+}
+.home-label .home-label-edit .label-manage {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 10px;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+.home-label .home-label-edit .label-manage .label-manage-detail {
+  border: 1px solid #666;
+  color: #666;
+  padding: 3px 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  position: relative;
+  font-size: 12px;
+  margin: 0 10px 10px 0;
+}
+.home-label .home-label-edit .label-manage .label-manage-detail .label-manage-cancel {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+.home-label .home-label-edit .label-manage .label-manage-detail .label-manage-cancel .label-icon {
+  z-index: 99;
+}
+.home-label .home-label-edit .label-manage .no-data {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  padding: 10px 0 15px 0;
+}
+.home-label .home-label-bottom {
+  margin-top: 10px;
+}
+

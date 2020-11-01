@@ -48,4 +48,14 @@
 .navBar .navBar-fixed .navBar-content .navBar-search .navBar-search-icon {
   margin-right: 5px;
 }
+.navBar .navBar-fixed .navBar-content.navBar-isSearch {
+  padding-left: 0;
+}
+.navBar .navBar-fixed .navBar-content.navBar-isSearch .navBar-search {
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+}
+.navBar .navBar-fixed .navBar-content .navBar-search-back {
+  padding: 0 5px;
+}
 
