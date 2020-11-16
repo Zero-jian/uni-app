@@ -73,6 +73,9 @@
 		methods: {
 			articleDetail() {
 				this.$emit("articleDetail");
+				uni.navigateTo({ 
+					url: '/pages/home-detail/home-detail'
+				})
 			}
 		}
 	}
