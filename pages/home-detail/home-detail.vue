@@ -1,21 +1,21 @@
 <template>
 	<view class="detail">
 		<view class="detail-title">
-			我是个前端开发者，我到底要不要学习?
+			{{formData.title}}
 		</view>
 		<view class="detail-author">
 			<view class="author-left">
 				<view class="author-left-img">
-					<image src="../../static/image/follow-active.png"></image>
+					<image :src="formData.author.avatar" mode="aspectFill"></image>
 				</view>
 				<view class="author-right-text">
 					<view class="author-top">
-						七个月
+						{{formData.author.author_name}}
 					</view>
 					<view class="author-bottom">
-						<text>2020年10月1日</text>
-						<text>100浏览</text>
-						<text>100收藏</text>
+						<text>{{formData.create_time}}</text>
+						<text>{{formData.browse_count}} 浏览</text>
+						<text>{{formData.thumbs_up_count}} 收藏</text>
 					</view>
 				</view>
 			</view>
@@ -25,7 +25,7 @@
 		</view>
 		<view class="detail-content">
 			页面详情内容
-		</view>
+		</view> 
 		<view class="detail-comment">
 			<view class="detail-comment-left">
 				<input type="text" placeholder="谈谈你的看法">
@@ -48,8 +48,12 @@
 	export default {
 		data() {
 			return {
-				
+				formData: {}
 			}
+		},
+		onLoad (query) {
+			console.log(query.params)
+			this.formData = JSON.parse(query.params);
 		},
 		methods: {
 			
@@ -76,7 +80,6 @@ page {
 		.author-left {
 			display: flex;
 			align-items: center;
-			margin-top: 10px;
 			padding: 10px 0;
 			.author-left-img {
 				flex-shrink: 0;
@@ -101,6 +104,9 @@ page {
 					color: #999;
 					text {
 						margin-left: 10px;
+					}
+					text:first-child {
+						margin: 0;
 					}
 				}
 			}

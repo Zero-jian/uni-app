@@ -72,9 +72,18 @@
 		},
 		methods: {
 			articleDetail() {
+				const item = this.item;
+				const params = {
+					_id: item._id,
+					title: item.title,
+					create_time: item.create_time,
+					thumbs_up_count: item.thumbs_up_count,
+					author: item.author,
+					browse_count: item.browse_count
+				}
 				this.$emit("articleDetail");
 				uni.navigateTo({ 
-					url: '/pages/home-detail/home-detail'
+					url: '/pages/home-detail/home-detail?params=' + JSON.stringify(params)
 				})
 			}
 		}
