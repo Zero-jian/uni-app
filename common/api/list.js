@@ -34,3 +34,10 @@ export const update_label = (param) => {
 		data: param
 	})
 }
+
+export const get_detail = (param) => {
+	return $http({
+		url: 'get_detail',
+		data: param
+	})
+}
