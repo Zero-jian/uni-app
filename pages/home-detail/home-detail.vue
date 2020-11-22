@@ -24,11 +24,19 @@
 			</view>
 		</view>
 		<view class="detail-content">
-			<u-parse :content="formData.content" :noData="noData"></u-parse>
+			<view class="detail-html">
+				<u-parse :content="formData.content" :noData="noData"></u-parse>
+			</view>
+			<view class="detail-newComment" v-if="formData.content">
+				<view class="comment-title">最新评论</view>
+				<view class="comment-content" v-for="item in commentsList" :key="item.comment_id">
+					<comments-box :comments="item" @reply="reply"></comments-box>
+				</view>   
+			</view>
 		</view> 
 		<view class="detail-comment">
 			<view class="detail-comment-left">
-				<input type="text" placeholder="谈谈你的看法">
+				<input type="text" placeholder="谈谈你的看法" @focus="inputShow">
 			</view>
 			<view class="detail-comment-right">
 				<view class="detail-bottom__icons-box">
@@ -42,20 +50,24 @@
 				</view>
 			</view>
 		</view>
+		<release ref="popup" @submit="submit"></release>
 	</view>
 </template>
 <script>
-	import uParse from '@/components/gaoyia-parse/parse.vue'
+	import uParse from '@/components/gaoyia-parse/parse.vue' 
 	export default {
 		data() {
 			return {
 				formData: {},
-				noData: '<p style="text-align: center; color: #666">详情加载中...</p>'
+				noData: '<p style="text-align: center; color: #666">详情加载中...</p>',
+				commentsList:[],
+				replyFormData: {},
 			}
 		},
 		onLoad (query) {
 			this.formData = JSON.parse(query.params);
 			this.getArticle();
+			this.getComments();
 		},
 		methods: {
 			getArticle () {
@@ -64,6 +76,48 @@
 				}).then(res => {
 					this.formData = res.data;
 				});
+			},
+			submit (data) {
+				this.updateComment(data);
+			},
+			// 更新评论
+			updateComment (data) {
+				uni.showLoading();
+				this.$api.update_comment({
+					article_id: this.formData._id,
+					content: data
+				}).then(res => {
+					uni.hideLoading();
+					uni.showToast({
+						title: '评论发布成功'
+					})
+					this.$refs.popup.close();
+					this.getComments();
+				}) 
+			},
+			// 请求评论内容
+			getComments(){
+				this.$api.get_comments({
+					article_id: this.formData._id
+				}).then(res=>{
+					console.log(res);
+					const {data} = res
+					this.commentsList = data
+				})
+			},
+			reply(e){
+				this.replyFormData = {
+					"comment_id":e.comments.comment_id,
+					"is_reply": e.is_reply
+				}
+				if(e.comments.reply_id){
+					this.replyFormData.reply_id = e.comments.reply_id
+				}
+				console.log(this.replyFormData);
+				this.openComment()
+			},
+			inputShow () {
+				this.$refs.popup.open();
 			}
 		},
 		components: {
@@ -133,6 +187,25 @@ page {
 		}
 	}
 	.detail-content {
+		.detail-html {
+			
+		}
+		.detail-newComment {
+			padding: 0 0 15px 0;
+			.detail-comment {
+				margin-top: 30px;
+				.comment-title {
+					padding: 10px 15px;
+					font-size: 14px;
+					color: #666;
+					border-bottom: 1px #f5f5ff solid;
+				}
+				.comment-content {
+					padding: 0 15px;
+					border-top: 1px #eee solid;
+				}
+			}
+		}
 		flex: 1;
 		padding: 20px 0;
 		overflow-x: hidden;
