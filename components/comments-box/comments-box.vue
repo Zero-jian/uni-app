@@ -13,7 +13,7 @@
 		<view class="comments-content">
 			<view>{{comments.comment_content}}</view>
 			<view class="comments-info">
-				<view class="comments-button" @click="commentsReply({comments:comments,is_reply:reply})">回复</view>
+				<!-- <view class="comments-button" @click="commentsReply({comments:comments,is_reply:reply})">回复</view> -->
 			</view>
 			<view class="comments-reply" v-for="item in comments.replys" :key="item.comment_id">
 				<comments-box :reply="true" :comments="item" @reply="commentsReply"></comments-box>

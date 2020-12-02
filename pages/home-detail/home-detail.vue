@@ -113,12 +113,15 @@
 				if(e.comments.reply_id){
 					this.replyFormData.reply_id = e.comments.reply_id
 				}
-				console.log(this.replyFormData);
 				this.openComment()
 			},
 			inputShow () {
 				this.$refs.popup.open();
-			}
+			},
+			// 打开评论发布窗口
+			openComment(){
+				this.$refs.popup.open()
+			},
 		},
 		components: {
 			uParse
